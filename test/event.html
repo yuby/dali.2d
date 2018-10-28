@@ -1,0 +1,37 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500" style="margin-left: 100px; border: 1px solid #ddd;"></canvas>
+<div id="eventName" style="width: 500px; height: 100px; font-size: 20px; line-height: 100px; text-align: center; padding: 10px; background-color: #c5d7dd;">
+	None.
+</div>
+</body>
+<script>
+  const canvas = new Dali('#point');
+
+  console.log()
+
+  canvas.on('click', (e) => {
+    console.log('click')
+  })
+
+  canvas.on('dbclick', () => {
+    console.log('dbclick')
+  }).on('drag', () => {
+      console.log('drag')
+    })
+  //   .on('endDrag', () => {
+  //     console.log('endDrag')
+  //   })
+	canvas.on('wheel', () => {
+		console.log('endDrag')
+	});
+
+  document.oncontextmenu = function () { // Use document as opposed to window for IE8 compatibility
+    alert('aa')
+    return false;
+  };
+
+</script>
+</html>
+

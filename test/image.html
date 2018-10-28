@@ -1,0 +1,82 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+  const canvas = new Dali('#point');
+
+  const path1 = new Dali.Path({
+   from: {
+     x: 10,
+     y: 90
+		},
+		to: {
+		  x: 500,
+			y: 90
+		},
+		color: '#dd5411',
+	});
+	const poly1 = new Dali.Polygon({
+    points: [
+      [100, 100],
+			[100, 200],
+      [300, 200],
+      [400, 150],
+      [300, 100]
+		],
+    color: '#ff0033',
+    bgColor: '#513cff',
+  });
+
+  const images = [
+  	{
+  		x: 10,
+  		y: 10,
+  		url: 'http://cfile28.uf.tistory.com/image/273FD73655215003301686',
+  	},
+  	{
+  		x: 100,
+  		y: 100,
+  		url: 'http://cfile9.uf.tistory.com/image/2577C9365521500608916E',
+  	},
+  ];
+  const imageArr = [];
+
+  images.forEach((image, idx) => {
+    const imageObj = new Image();
+
+    imageObj.onload = () => {
+      imageArr.push({
+        url: image.url,
+        image: imageObj,
+        x: image.x,
+        y: image.y,
+        width: 50,
+        height: 50,
+      });
+
+      if (imageArr.length === images.length) {
+        const image1 = new Dali.Image(imageArr);
+        canvas.add([path1, poly1]);
+        canvas.add(image1);
+
+        canvas.draw();
+      }
+    };
+
+    imageObj.src = image.url;
+  })
+
+  // const image = new Dali.Image(images);
+
+
+  // canvas.add([path1, poly1]);
+
+
+
+
+  //
+  //
+</script>
+</html>

@@ -1,0 +1,57 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+  const canvas = new Dali('#point');
+
+  const rect1 = new Dali.Rect({
+		x: 100,
+		y: 100,
+		width: 100,
+		height: 100,
+		bgColor: '#dd2441',
+		color: '#1b17ee'
+	});
+  const rect2 = new Dali.Rect({
+    x: 200,
+    y: 200,
+    width: 200,
+    height: 200,
+    bgColor: '#d999dd',
+    color: '#74aeee'
+  });
+  const rect3 = new Dali.Rect({
+    x: 300,
+    y: 300,
+    width: 300,
+    height: 300,
+    bgColor: '#59dd58',
+    color: '#74aeee'
+  });
+
+  canvas.add([rect1, rect2]);
+	canvas.add(rect3);
+
+	const rectArr = [];
+
+	for(let idx = 1; idx < 10; idx++) {
+    rectArr.push(new Dali.Rect({
+      x: 500 - idx * 20 * 2,
+      y: idx * 20,
+      width: 20 * idx,
+      height: 20 * idx,
+    }))
+	}
+
+  canvas.group(rectArr,
+    {
+      color: '#85d6ff',
+      bgColor: '#f5ffdd'
+    }
+  );
+
+  canvas.draw();
+</script>
+</html>

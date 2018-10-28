@@ -1,0 +1,48 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+const text = new Dali.Text([
+  {
+    x: 100,
+    y: 100,
+    text: 'Wow Bravo1',
+    font: '30px serif',
+    textAlign: 'left',
+    textBaseline: 'top',
+    color: '#81bfee',
+    bgColor: '#dd8369',
+    lineWidth: 1,
+    lineHeight: 30,
+    wordBreak: true,
+    // rad: 4.694935687864747,
+    rad: 0.1,
+    angle: 269,
+  },
+  {
+    x: 300,
+    y: 100,
+    text: 'Wow Bravo2',
+    font: '30px serif',
+    textAlign: 'left',
+    textBaseline: 'top',
+    color: '#81bfee',
+    bgColor: '#dd8369',
+    lineWidth: 1,
+    lineHeight: 30,
+    wordBreak: true,
+    //rad: 1.5882496193148399,
+    rad: 0.4,
+    angle: 91,
+  },
+]);
+
+const canvas = new Dali('#point');
+
+canvas.add(text);
+canvas.draw();
+
+</script>
+</html>

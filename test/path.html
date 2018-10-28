@@ -1,0 +1,73 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+  const canvas = new Dali('#point');
+
+  const path1 = new Dali.Path([
+    {
+      points: [
+        [10, 90],
+        [500, 90]
+      ],
+      color: '#dd5411',
+    },
+    {
+      points: [
+        [10, 420],
+        [100, 120],
+        [200, 220],
+        [300, 190],
+        [400, 420]
+      ],
+      arrow: true,
+      lineWidth: 5,
+      color: '#dd5411',
+    },
+    {
+      points: [
+        [10, 220],
+        [480, 220]
+      ],
+      arrow: true,
+      lineWidth: 5,
+      color: '#dd5411',
+    },
+    {
+      points: [
+        [300, 0],
+        [300, 220]
+      ],
+      color: '#dd5411',
+    },
+  ]);
+
+  // const path2 = new Dali.Path({
+  //   points: [
+  //     [10, 420],
+  //     [100, 120],
+  //     [200, 220],
+  //     [300, 190],
+  //     [400, 420]
+  //   ],
+  //   color: 'red',
+  //   lineWidth: 5,
+  //   arrow: true,
+  // });
+  // const path3 = new Dali.Path({
+  //   points: [
+  //     [10, 220],
+  //     [480, 220]
+  //   ],
+  //   color: 'green',
+  //   arrow: true,
+  // });
+
+
+  canvas.add(path1);
+  // canvas.add([path2, path3]);
+  canvas.draw();
+</script>
+</html>

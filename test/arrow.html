@@ -1,0 +1,880 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+
+  const canvas = new Dali('#point');
+
+  canvas.on('click', () => {
+    console.log('Click')
+  })
+
+  const arrow = new Dali.Arrow([
+  {
+    "points": [
+      [
+        1399.66,
+        698.04
+      ]
+    ],
+    "angle": 32,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1400.3,
+        698.04
+      ]
+    ],
+    "angle": 212,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1391.98,
+        906.04
+      ]
+    ],
+    "angle": 36,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1446.38,
+        989.88
+      ]
+    ],
+    "angle": 316,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1446.38,
+        989.88
+      ]
+    ],
+    "angle": 136,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1467.5,
+        1014.2
+      ]
+    ],
+    "angle": 316,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1482.22,
+        1030.8400000000001
+      ]
+    ],
+    "angle": 136,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1461.1,
+        1006.52
+      ]
+    ],
+    "angle": 136,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1461.1,
+        1006.52
+      ]
+    ],
+    "angle": 316,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1491.8200000000002,
+        970.04
+      ]
+    ],
+    "angle": 44,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1491.8200000000002,
+        970.04
+      ]
+    ],
+    "angle": 224,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1195.5,
+        795.96
+      ]
+    ],
+    "angle": 104,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1064.94,
+        671.16
+      ]
+    ],
+    "angle": 0,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        742.38,
+        654.52
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        742.38,
+        654.52
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        792.94,
+        413.24
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        792.94,
+        413.24
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        403.17999999999995,
+        580.92
+      ]
+    ],
+    "angle": 300,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        647.66,
+        896.44
+      ]
+    ],
+    "angle": 24,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        631.02,
+        894.52
+      ]
+    ],
+    "angle": 200,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        828.78,
+        806.84
+      ]
+    ],
+    "angle": 84,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        855.02,
+        795.32
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        833.26,
+        1064.12
+      ]
+    ],
+    "angle": 180,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        838.38,
+        1130.68
+      ]
+    ],
+    "angle": 180,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        750.06,
+        1145.4
+      ]
+    ],
+    "angle": 0,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        750.7,
+        1117.88
+      ]
+    ],
+    "angle": 0,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        753.9,
+        1068.6
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        753.9,
+        1068.6
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        5.100000000000023,
+        1041.72
+      ]
+    ],
+    "angle": 84,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        24.93999999999994,
+        1146.68
+      ]
+    ],
+    "angle": 276,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        25.579999999999927,
+        1146.68
+      ]
+    ],
+    "angle": 96,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        108.13999999999999,
+        1035.96
+      ]
+    ],
+    "angle": 264,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        84.45999999999992,
+        941.88
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        84.45999999999992,
+        941.88
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        211.81999999999994,
+        1080.1200000000001
+      ]
+    ],
+    "angle": 344,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        95.9799999999999,
+        785.08
+      ]
+    ],
+    "angle": 0,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        95.9799999999999,
+        785.08
+      ]
+    ],
+    "angle": 180,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        83.17999999999995,
+        722.36
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        83.17999999999995,
+        722.36
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        0.6200000000000045,
+        784.44
+      ]
+    ],
+    "angle": 192,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        -0.020000000000095497,
+        787
+      ]
+    ],
+    "angle": 12,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        47.33999999999992,
+        865.72
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        45.41999999999996,
+        865.72
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        24.93999999999994,
+        865.72
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        24.93999999999994,
+        865.72
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        6.379999999999882,
+        509.88
+      ]
+    ],
+    "angle": 356,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        6.379999999999882,
+        509.88
+      ]
+    ],
+    "angle": 176,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        11.5,
+        671.8
+      ]
+    ],
+    "angle": 356,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        11.5,
+        669.88
+      ]
+    ],
+    "angle": 176,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        59.5,
+        579.64
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        59.5,
+        579.64
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        94.05999999999995,
+        580.28
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        94.05999999999995,
+        580.28
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        100.45999999999992,
+        580.28
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        100.45999999999992,
+        580.28
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        165.74,
+        431.8
+      ]
+    ],
+    "angle": 348,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        261.1,
+        88.12
+      ]
+    ],
+    "angle": 180,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        261.1,
+        88.12
+      ]
+    ],
+    "angle": 0,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        558.7,
+        38.200000000000045
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        558.7,
+        38.200000000000045
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        463.34,
+        138.03999999999996
+      ]
+    ],
+    "angle": 340,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        427.5,
+        84.91999999999996
+      ]
+    ],
+    "angle": 160,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        753.26,
+        352.44
+      ]
+    ],
+    "angle": 248,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        751.98,
+        352.44
+      ]
+    ],
+    "angle": 68,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        782.7,
+        112.43999999999994
+      ]
+    ],
+    "angle": 180,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        782.7,
+        112.43999999999994
+      ]
+    ],
+    "angle": 360,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        782.7,
+        95.15999999999997
+      ]
+    ],
+    "angle": 360,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        782.7,
+        93.23999999999995
+      ]
+    ],
+    "angle": 180,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        782.7,
+        75.32
+      ]
+    ],
+    "angle": 180,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        782.7,
+        75.32
+      ]
+    ],
+    "angle": 360,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        748.14,
+        144.43999999999994
+      ]
+    ],
+    "angle": 88,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        748.14,
+        144.43999999999994
+      ]
+    ],
+    "angle": 268,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1066.22,
+        483
+      ]
+    ],
+    "angle": 0,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1068.78,
+        349.24
+      ]
+    ],
+    "angle": 180,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1418.22,
+        670.52
+      ]
+    ],
+    "angle": 212,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1418.22,
+        670.52
+      ]
+    ],
+    "angle": 32,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1436.78,
+        630.2
+      ]
+    ],
+    "angle": 192,
+    "color": "#ff4700",
+    "lineWidth": 10
+  },
+  {
+    "points": [
+      [
+        1436.78,
+        630.2
+      ]
+    ],
+    "angle": 12,
+    "color": "#ff4700",
+    "lineWidth": 10
+  }
+]);
+
+
+
+  canvas.add(arrow);
+  canvas.draw();
+</script>
+</html>

@@ -1,0 +1,52 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+  const canvas = new Dali('#point');
+  const poly1 = new Dali.Polygon([
+    {
+      points: [
+        [100, 100],
+        [100, 200],
+        [300, 200],
+        [400, 150],
+        [300, 100]
+      ],
+      color: '#ff0033',
+      bgColor: '#513cff',
+      opacity: 0.2
+    },
+    {
+    points: [
+      [150, 150],
+      [150, 250],
+      [350, 250],
+      [450, 200],
+      [350, 150]
+    ],
+    color: '#ff0033',
+    bgColor: '#513cff',
+    opacity: 0.5
+  },
+  {
+    points: [
+      [150, 250],
+      [150, 350],
+      [350, 350],
+      [450, 300],
+      [350, 250]
+    ],
+    color: '#000000',
+    bgColor: '#ff0033',
+    opacity: 0.9
+  }
+  ]);
+
+
+  canvas.add(poly1);
+  canvas.draw();
+
+</script>
+</html>

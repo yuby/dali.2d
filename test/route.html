@@ -1,0 +1,47 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+  const canvas = new Dali('#point');
+	const point = [
+	  [10, 10],
+    [50, 30],
+    [80, 80],
+    [120, 110],
+    [150, 120],
+    [200, 300],
+    [210, 350],
+    [400, 300]
+	];
+
+	const routePoint = [];
+  point.forEach((p) => {
+    routePoint.push(new Dali.Arc({
+      x: p[0],
+      y: p[1],
+      radius: 6
+    }))
+	});
+
+  canvas.group(routePoint,{
+    color: '#0bff00',
+    bgColor: '#d400ff',
+    lineWidth: 3
+  });
+
+  const run = new Dali.SmoothCurve({
+		route: point,
+		resolution: 1,
+    color: '#99b5ff',
+    lineWidth: 4
+	});
+
+  canvas.add(run);
+
+  canvas.draw();
+
+
+</script>
+</html>

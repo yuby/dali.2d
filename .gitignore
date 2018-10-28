@@ -1,0 +1,4 @@
+node_modules/
+.idea
+.tern-project
+package-lock.json

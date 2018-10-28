@@ -1,0 +1,84 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+  const canvas = new Dali('#point');
+  const rectArr = [];
+  const color = ['red', 'blue'];
+
+  for (let idx = 0; idx < 5; idx += 1) {
+    let rect = {
+      points: [
+        [100 + (idx * 10), 100 + (idx * 10)],
+        [100 + (idx * 10), 200 - (idx * 10)],
+        [300 - (idx * 10), 200 - (idx * 10)],
+        [300 - (idx * 10), 100 + (idx * 10)]
+      ],
+      color: color[idx % 2],
+      bgColor: color[idx % 2],
+      globalCompositeOperation: idx > 0 ? 'xor' : ''
+    };
+    rectArr.push(rect);
+  }
+
+  const polygon = new Dali.Polygon(rectArr);
+
+  const textArr = [];
+  for (let txt = 0; txt < 5; txt += 1) {
+    const text = {
+      x: 10 + (txt * 10),
+      y: 10+ (txt * 10),
+      text: 'Wow',
+      fontSize: `${10 * txt}px`,
+      fontFamily: 'serif',
+      textAlign: 'left',
+      textBaseline: 'top',
+      color: '#81bfee',
+      bgColor: '#dd8369',
+      lineWidth: 3,
+    };
+    textArr.push(text)
+  }
+  const text = new Dali.Text(textArr);
+
+  const rectGropu = [];
+
+  for(let idx = 1; idx < 10; idx++) {
+    rectGropu.push(new Dali.Rect({
+      x: 500 - idx * 20 * 2,
+      y: idx * 20,
+      width: 20 * idx,
+      height: 20 * idx,
+    }))
+  }
+
+  canvas.group(rectGropu,
+    {
+      color: '#85d6ff',
+      bgColor: '#f5ffdd'
+    }
+  );
+
+  const arcArr = [];
+  for (let idx = 0; idx < 5; idx += 1) {
+    let arc = {
+      x: 100 + (idx * 50),
+      y: 100 + (idx * 50),
+      radius: 40,
+      color: '#85d6ff',
+      bgColor: '#393eff',
+    };
+    arcArr.push(arc);
+  }
+
+  const arc = new Dali.Arc(arcArr);
+
+  canvas.add(polygon);
+  canvas.add(text);
+  canvas.add(arc);
+  canvas.draw();
+
+</script>
+</html>

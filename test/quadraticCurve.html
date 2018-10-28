@@ -1,0 +1,67 @@
+<html>
+<head></head>
+<body>
+<canvas id="point" width="500", height="500"></canvas>
+</body>
+<script>
+  const canvas = new Dali('#point');
+
+  const qpath1 = new Dali.QuadraticCurve({
+		from: {
+		  x: 100,
+			y: 100
+		},
+		mid: {
+		  x: 400,
+			y: 200
+		},
+		to: {
+		  x: 100,
+			y: 300
+		},
+    color: '#dd5411'
+	});
+  const qpath2 = new Dali.QuadraticCurve({
+    from: {
+      x: 200,
+      y: 100
+    },
+    mid: {
+      x: 500,
+      y: 200
+    },
+    to: {
+      x: 200,
+      y: 300
+    },
+    color: '#dd41c8'
+  });
+
+  const qpathArr1 = [];
+  for(let idx = 1; idx< 50; idx ++) {
+    qpathArr1.push(new Dali.QuadraticCurve({
+      from: {
+        x: idx * 10,
+        y: 100
+      },
+      mid: {
+        x: idx * 30,
+        y: 200
+      },
+      to: {
+        x: idx * 10,
+        y: 300
+      },
+    }))
+  }
+
+  canvas.add([qpath1, qpath2]);
+
+  canvas.group(qpathArr1, {
+    color: '#41dd48'
+	});
+  canvas.draw();
+
+</script>
+</html>
+
