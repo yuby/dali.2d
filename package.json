@@ -1,6 +1,6 @@
 {
   "name": "dali.2d",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Draw something awesome on the Canvas With JavaScript",
   "keywords": ["canvas", "2d", "graphic"],
   "author": {

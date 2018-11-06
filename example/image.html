@@ -6,29 +6,6 @@
 <script>
   const canvas = new Dali('#point');
 
-  const path1 = new Dali.Path({
-   from: {
-     x: 10,
-     y: 90
-		},
-		to: {
-		  x: 500,
-			y: 90
-		},
-		color: '#dd5411',
-	});
-	const poly1 = new Dali.Polygon({
-    points: [
-      [100, 100],
-			[100, 200],
-      [300, 200],
-      [400, 150],
-      [300, 100]
-		],
-    color: '#ff0033',
-    bgColor: '#513cff',
-  });
-
   const images = [
   	{
   		x: 10,
@@ -52,13 +29,12 @@
         image: imageObj,
         x: image.x,
         y: image.y,
-        width: 50,
-        height: 50,
+        offsetX: -100,
+        offsetY: 100,
       });
 
       if (imageArr.length === images.length) {
         const image1 = new Dali.Image(imageArr);
-        canvas.add([path1, poly1]);
         canvas.add(image1);
 
         canvas.draw();
@@ -68,15 +44,5 @@
     imageObj.src = image.url;
   })
 
-  // const image = new Dali.Image(images);
-
-
-  // canvas.add([path1, poly1]);
-
-
-
-
-  //
-  //
 </script>
 </html>

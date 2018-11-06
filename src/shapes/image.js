@@ -21,14 +21,16 @@ class Image {
       x = 0,
       y = 0,
       image,
-      url,
+      offsetX = 0,
+      offsetY = 0,
     } = props || this.props;
 
     this.props.push({
       x,
       y,
       image,
-      url,
+      offsetX,
+      offsetY,
     });
   }
 
@@ -42,11 +44,11 @@ class Image {
     for (let idx = 0; idx < propsLength; idx += 1) {
       const prop = props[idx];
       const {
-        x, y, image,
+        x, y, image, offsetX, offsetY,
       } = prop;
 
       ctx.save();
-      ctx.drawImage(image, x, y);
+      ctx.drawImage(image, x + offsetX, y + offsetY);
       ctx.restore();
     }
   }

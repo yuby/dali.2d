@@ -28,7 +28,7 @@ module.exports = {
     new WebpackCleanupPlugin(['dist']),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: 'test/arrow.html',
+      template: 'test/image.html',
     }),
   ],
 };
