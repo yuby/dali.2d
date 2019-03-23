@@ -10,12 +10,9 @@ const LINE_TYPE = {
 };
 
 const drawPolygon = (self) => {
-  let prevStyle = '';
-
   const { context: ctx, props } = self;
   const propsLength = props.length;
-
-  if (propsLength === 0) return;
+  let prevStyle = '';
 
   ctx.beginPath();
 
@@ -32,10 +29,7 @@ const drawPolygon = (self) => {
       isClose = true,
       opacity,
     } = prop;
-    const pointsCount = points.length;
-    const currentStyle = `${color || ''}${bgColor || ''}${lineWidth || ''}${lineType || ''}`;
-    const isSameStyle = currentStyle === prevStyle;
-    const isLastProps = propsIdx === propsLength - 1;
+
     const style = {
       color,
       bgColor,
@@ -44,6 +38,11 @@ const drawPolygon = (self) => {
       opacity,
     };
 
+    const pointsCount = points.length;
+    const currentStyle = `${color || ''}${bgColor || ''}${lineWidth || ''}${lineType || ''}`;
+    const isSameStyle = currentStyle === prevStyle;
+    const isLastProps = propsIdx === propsLength - 1;
+
     if (!isSameStyle) {
       if (propsIdx !== 0) {
         ctx.stroke();
@@ -51,7 +50,10 @@ const drawPolygon = (self) => {
       }
 
       ctx.beginPath();
-      self.setStyle(style);
+
+      self.setStyle(Object.assign(style, {
+        isClose,
+      }));
       if (LINE_TYPE[lineType]) {
         ctx.setLineDash(LINE_TYPE[lineType].map(value => value * lineWidth));
       } else {
@@ -72,8 +74,8 @@ const drawPolygon = (self) => {
     }
 
     if (holes && holes.length > 0) {
-      let hidx = 0;
       const holeCnt = holes.length;
+      let hidx = 0;
 
       for (; hidx < holeCnt; hidx += 1) {
         const hole = holes[hidx];
@@ -91,15 +93,18 @@ const drawPolygon = (self) => {
       }
     }
 
-    prevStyle = currentStyle;
 
-    if (isSameStyle && isLastProps) {
+    if (isLastProps) {
       ctx.stroke();
       ctx.fill();
+      ctx.restore();
     } else if (!isSameStyle) {
       ctx.stroke();
       ctx.fill();
-    } else ;
+      prevStyle = currentStyle;
+
+      ctx.beginPath();
+    }
   }
 };
 
@@ -107,35 +112,7 @@ const Polygon = class extends Shape {
   constructor(props) {
     super(props);
 
-    this.uuid = `path-${uuidv1()}`;
-  }
-
-  _setProperty(props) {
-    const {
-      points,
-      color,
-      bgColor,
-      globalCompositeOperation,
-      lineWidth,
-      lineType,
-      holes,
-      isClose = true,
-      opacity,
-    } = props;
-
-    this.props.push({
-      points,
-      isClose,
-      lineType,
-      holes,
-      style: {
-        color,
-        bgColor,
-        lineWidth,
-        globalCompositeOperation,
-        opacity,
-      },
-    });
+    this.uuid = `polygon-${uuidv1()}`;
   }
 
   draw() {
@@ -145,19 +122,20 @@ const Polygon = class extends Shape {
   setStyle(style) {
     const { context: ctx } = this;
     const {
-      bgColor = 'rgba(255,255,255,0)',
+      bgColor,
       color = 'rgba(255,255,255,0)',
       lineWidth = 1,
       globalCompositeOperation = 'source-over',
       opacity = 1,
+      isClose,
     } = style;
 
-    ctx.fillStyle = bgColor;
+    ctx.fillStyle = isClose && bgColor ? bgColor : 'rgba(255,255,255,0)';
     ctx.strokeStyle = color;
     ctx.lineWidth = lineWidth;
     ctx.globalCompositeOperation = globalCompositeOperation;
     ctx.globalAlpha = opacity;
   }
-}
+};
 
 export default Polygon;
