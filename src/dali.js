@@ -5,7 +5,6 @@ import Path from './shapes/path';
 import QuadraticCurve from './shapes/quadraticCurve';
 import BezierCurve from './shapes/bezierCurve';
 import Text from './shapes/text';
-import Group from './shapes/group';
 import Polygon from './shapes/polygon';
 import SmoothCurve from './shapes/smoothCurve';
 import Image from './shapes/image';
@@ -65,21 +64,15 @@ class Dali {
     });
   }
 
-  group(features, style) {
-    const groupElement = new Group(features, style);
-
-    this.featureQueue.push(groupElement);
-  }
-
   clear() {
     const { context, canvas } = this;
 
     context.clearRect(0, 0, canvas.width, canvas.height);
   }
 
-  delete(element) {
-    if (element) {
-      this.featureQueue = this.featureQueue.filter(elem => elem !== element);
+  delete(id) {
+    if (id) {
+      this.featureQueue = this.featureQueue.filter(elem => elem.uuid !== id);
     } else {
       this.featureQueue = [];
     }
@@ -103,13 +96,13 @@ class Dali {
 Dali.Arc = Arc;
 Dali.Rect = Rect;
 Dali.Path = Path;
+Dali.Text = Text;
+Dali.Arrow = Arrow;
+Dali.Image = Image;
 Dali.QuadraticCurve = QuadraticCurve;
 Dali.BezierCurve = BezierCurve;
-Dali.Text = Text;
-Dali.Polygon = Polygon;
 Dali.SmoothCurve = SmoothCurve;
-Dali.Image = Image;
-Dali.Arrow = Arrow;
+Dali.Polygon = Polygon;
 
 const _global = typeof window === 'undefined' ? self : window;
 

@@ -1,27 +1,17 @@
-import typeChecker from '../utils/typeCheck';
+import uuidv1 from 'uuid/v1';
+import Shape from './shape';
 
-class Text {
-  constructor(props) {
-    this.props = [];
-    if (typeChecker(props) === '[object Object]') {
-      this.propsLength = 1;
-      this.setProperty(props);
-    } else if (typeChecker(props) === '[object Array]') {
-      const propsLen = props.length;
+const drawText = (self) => {
+  const { context: ctx, props } = self;
+  const propsLength = props.length;
+  let idx = 0;
 
-      this.propsLength = propsLen;
-      for (let idx = 0; idx < propsLen; idx += 1) {
-        this.setProperty(props[idx]);
-      }
-    }
-  }
-
-  setProperty(props) {
+  for (; idx < propsLength; idx += 1) {
+    const prop = props[idx];
     const {
-      x,
-      y,
+      points,
       text,
-      maxWidth,
+      // maxWidth,
       color,
       bgColor,
       font,
@@ -31,51 +21,31 @@ class Text {
       lineHeight,
       wordBreak = false,
       rad,
-      angle,
       opacity,
-    } = props || this.props;
+    } = prop;
+    const style = {
+      color,
+      bgColor,
+      font,
+      textAlign,
+      textBaseline,
+      lineWidth,
+      lineHeight,
+      opacity,
+    };
+    const pointsCount = points.length;
 
-    this.props.push({
-      x,
-      y,
-      text,
-      maxWidth,
-      wordBreak,
-      rad,
-      angle,
-      style: {
-        color,
-        bgColor,
-        font,
-        textAlign,
-        textBaseline,
-        lineWidth,
-        lineHeight,
-        opacity,
-      },
-    });
-  }
+    ctx.save();
+    ctx.beginPath();
 
-  _drawText() {
-    const {
-      context: ctx, props, propsLength,
-    } = this;
-    let idx = 0;
+    self.setStyle(style);
+    ctx.rotate(rad || 0);
 
-    for (; idx < propsLength; idx += 1) {
-      const prop = props[idx];
-      const {
-        x, y, style, text, wordBreak, rad,
-      } = prop;
-
-      ctx.save();
-      ctx.beginPath();
-
-      this._setStyle(style);
-      ctx.rotate(rad || 0);
+    for (let pIdx = 0; pIdx < pointsCount; pIdx += 1) {
+      const point = points[pIdx];
+      const [x, y] = point;
 
       if (wordBreak) {
-        const { lineHeight } = style;
         const _text = text.split(' ');
         let yPosition = +y;
         let i = 0;
@@ -89,27 +59,44 @@ class Text {
         ctx.strokeText(text, x, y);
         ctx.fillText(text, x, y);
       }
-
       ctx.restore();
     }
   }
+};
+
+const Text = class extends Shape {
+  constructor(props) {
+    super(props);
+
+    this.uuid = `text-${uuidv1()}`;
+  }
 
   draw() {
-    this._drawText();
+    drawText(this);
   }
 
-  _setStyle(style) {
+  setStyle(style) {
     const { context: ctx } = this;
+    const {
+      textBaseline = 'alphabetic',
+      textAlign = 'alphabetic',
+      bgColor = 'rgba(255,255,255,0)',
+      color = 'rgba(255,255,255,0)',
+      lineWidth = 0,
+      globalCompositeOperation = 'source-over',
+      opacity = 1,
+      font,
+    } = style;
 
-    ctx.textBaseline = style.textBaseline ? style.textBaseline : 'alphabetic';
-    ctx.textAlign = style.textAlign ? style.textAlign : 'alphabetic';
-    ctx.font = `${style.font}`;
-    ctx.fillStyle = style.bgColor ? style.bgColor : 'rgba(255,255,255,0)';
-    ctx.strokeStyle = style.color ? style.color : 'rgba(255,255,255,0)';
-    ctx.lineWidth = style.lineWidth ? style.lineWidth : '1';
-    ctx.globalCompositeOperation = style.globalCompositeOperation ? style.globalCompositeOperation : 'source-over';
-    ctx.globalAlpha = style.opacity ? style.opacity : 1;
+    ctx.textBaseline = textBaseline;
+    ctx.textAlign = textAlign;
+    ctx.font = `${font}`;
+    ctx.fillStyle = bgColor;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
+    ctx.globalCompositeOperation = globalCompositeOperation;
+    ctx.globalAlpha = opacity;
   }
-}
+};
 
 export default Text;

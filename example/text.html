@@ -6,8 +6,7 @@
 <script>
 const text = new Dali.Text([
   {
-    x: 100,
-    y: 100,
+    points: [[100, 110]],
     text: 'Wow Bravo1',
     font: '30px serif',
     textAlign: 'left',
@@ -19,11 +18,9 @@ const text = new Dali.Text([
     wordBreak: true,
     // rad: 4.694935687864747,
     rad: 0.1,
-    angle: 269,
   },
   {
-    x: 300,
-    y: 100,
+    points: [[200, 220]],
     text: 'Wow Bravo2',
     font: '30px serif',
     textAlign: 'left',
@@ -35,7 +32,21 @@ const text = new Dali.Text([
     wordBreak: true,
     //rad: 1.5882496193148399,
     rad: 0.4,
-    angle: 91,
+  },
+  {
+    points: [[400, 220]],
+    text: 'W o w B r a v o 3',
+    font: '30px serif',
+    textAlign: 'center',
+    textBaseline: 'top',
+    color: '#81bfee',
+    bgColor: '#dd8369',
+    lineWidth: 1,
+    lineHeight: 30,
+    wordBreak: true,
+    //rad: 1.5882496193148399,
+    // rad: 0.4,
+    // rad: 0,
   },
 ]);
 

@@ -1,57 +1,42 @@
-import typeChecker from '../utils/typeCheck';
+import uuidv1 from 'uuid/v1';
+import Shape from './shape';
 
-class Image {
-  constructor(props) {
-    this.props = [];
-    if (typeChecker(props) === '[object Object]') {
-      this.propsLength = 1;
-      this.setProperty(props);
-    } else if (typeChecker(props) === '[object Array]') {
-      const propsLen = props.length;
+const drawImage = (self) => {
+  const { context: ctx, props } = self;
+  const propsLength = props.length;
 
-      this.propsLength = propsLen;
-      for (let idx = 0; idx < propsLen; idx += 1) {
-        this.setProperty(props[idx]);
-      }
+  for (let idx = 0; idx < propsLength; idx += 1) {
+    const prop = props[idx];
+    const {
+      points, image, width, height, offsetX = 0, offsetY = 0,
+    } = prop;
+    const pointsCount = points.length;
+
+    for (let pIdx = 0; pIdx < pointsCount; pIdx += 1) {
+      const point = points[pIdx];
+      const [x, y] = point;
+      const fixedX = Math.trunc(x);
+      const fixedY = Math.trunc(y);
+      const imageWidth = width || image.width;
+      const imageHeight = height || image.height;
+
+      ctx.drawImage(
+        image, fixedX + offsetX, fixedY + offsetY, imageWidth, imageHeight,
+      );
     }
   }
+};
 
-  setProperty(props) {
-    const {
-      x = 0,
-      y = 0,
-      image,
-      offsetX = 0,
-      offsetY = 0,
-    } = props || this.props;
+const Image = class extends Shape {
+  constructor(props) {
+    super(props);
 
-    this.props.push({
-      x,
-      y,
-      image,
-      offsetX,
-      offsetY,
-    });
+    this.uuid = `image-${uuidv1()}`;
   }
 
   draw() {
-    const {
-      context: ctx,
-      props,
-      propsLength,
-    } = this;
-
-    for (let idx = 0; idx < propsLength; idx += 1) {
-      const prop = props[idx];
-      const {
-        x, y, image, offsetX, offsetY,
-      } = prop;
-
-      ctx.save();
-      ctx.drawImage(image, x + offsetX, y + offsetY);
-      ctx.restore();
-    }
+    drawImage(this);
   }
-}
+};
 
 export default Image;

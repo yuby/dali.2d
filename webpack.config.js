@@ -11,6 +11,11 @@ module.exports = {
     filename: 'dali.2d.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './dist',
+    hot: true,
+  },
   module: {
     rules: [
       {
@@ -28,7 +33,7 @@ module.exports = {
     new WebpackCleanupPlugin(['dist']),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: 'test/image.html',
+      template: 'example/polygon.html',
     }),
   ],
 };

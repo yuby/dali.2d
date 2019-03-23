@@ -6,73 +6,52 @@
 <script>
   const canvas = new Dali('#point');
 
-  const bpath1 = new Dali.BezierCurve({
-    from: {
-      x: 100,
-      y: 100
-    },
-    mid1: {
-      x: 400,
-      y: 200
-    },
-    mid2: {
-      x: 100,
-      y: 100
-    },
-    to: {
-      x: 100,
-      y: 300
-    },
-    color: '#dd5411',
-    bgColor: '#46dd2c'
-  });
-  const bpath2 = new Dali.BezierCurve({
-    from: {
-      x: 200,
-      y: 100
-    },
-    mid1: {
-      x: 500,
-      y: 200
-    },
-    mid2: {
-      x: 300,
-      y: 400
-    },
-    to: {
-      x: 200,
-      y: 300
-    },
-    color: '#46dd2c'
-  });
+  const bCurvArr = [];
 
-  const bpathArr1 = [];
-  for(let idx = 1; idx< 50; idx ++) {
-    bpathArr1.push(new Dali.BezierCurve({
-      from: {
-        x: idx * 10,
-        y: 100
-      },
-      mid1: {
-        x: idx * 10,
-        y: 200
-      },
-      mid2: {
-        x: 500 - idx * 10,
-        y: 200
-      },
-      to: {
-        x: idx * 10,
-        y: 400
-      },
-    }))
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  canvas.add([bpath1, bpath2]);
+  const rangeEnd = getRandomInt(3, 10);
+  
+  for (let i = 0; i < rangeEnd; i++) {
+    const curvObj = {
+      points: [],
+      bgColor: `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`,
+      color: `rgb(${getRandomInt(0, 255)}, ${getRandomInt(0, 255)}, ${getRandomInt(0, 255)})`,
+      lineWidth: getRandomInt(5, 10),
+      opacity: Math.random(),
+    };
 
-  // canvas.group(bpathArr1, {
-  //   color: '#dd829b'
-  // });
+    const pointCount = getRandomInt(2, 10);
+    const points = [];
+
+    for (let p = 0; p < pointCount; p++) {
+      const fromX = getRandomInt(0, 500);
+      const fromY = getRandomInt(0, 500);
+      const midX1 = getRandomInt(0, 500);
+      const midY1 = getRandomInt(0, 500);
+      const midX2 = getRandomInt(0, 500);
+      const midY2 = getRandomInt(0, 500);
+      const toX = getRandomInt(0, 500);
+      const toY = getRandomInt(0, 500);
+      const point = [fromX, fromY, midX1, midY1, midX2, midY2, toX, toY];
+
+      points.push(point);
+    }
+
+    bCurvArr.push(Object.assign(curvObj, {
+      points,
+    }));
+  }
+
+  const curve = new Dali.BezierCurve(bCurvArr);
+
+  console.log(curve)
+
+  canvas.add(curve);
   canvas.draw();
 </script>
 </html>

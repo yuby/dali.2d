@@ -5,7 +5,7 @@
 </body>
 <script>
   const canvas = new Dali('#point');
-	const point = [
+	const points1 = [
 	  [10, 10],
     [50, 30],
     [80, 80],
@@ -13,32 +13,48 @@
     [150, 120],
     [200, 300],
     [210, 350],
-    [400, 300]
+    [400,50]
+  ];
+  
+  const points2 = [
+	  [15, 15],
+    [60, 30],
+    [120, 80],
+    [220, 200],
+    [350, 300],
+    [490, 410],
 	];
 
-	const routePoint = [];
-  point.forEach((p) => {
-    routePoint.push(new Dali.Arc({
-      x: p[0],
-      y: p[1],
-      radius: 6
-    }))
-	});
+	const run = new Dali.SmoothCurve([
+    {
+      points: points1,
+      resolution: 50,
+      color: '#99b5ff',
+      lineWidth: 1
+    },
+    {
+      points: points2,
+      resolution: 10,
+      color: '#ff0033',
+      lineWidth: 2
+    }
+  ]);
+  const pointarr = new Dali.Arc([
+    {
+      points: points1,
+      radius: 1,
+      color: '#99b5ff',
+      lineWidth: 4
+    },
+    {
+      points: points2,
+      radius: 1,
+      color: '#ff0033',
+      lineWidth: 4
+    }
+  ]);
 
-  canvas.group(routePoint,{
-    color: '#0bff00',
-    bgColor: '#d400ff',
-    lineWidth: 3
-  });
-
-  const run = new Dali.SmoothCurve({
-		route: point,
-		resolution: 1,
-    color: '#99b5ff',
-    lineWidth: 4
-	});
-
-  canvas.add(run);
+  canvas.add([run, pointarr]);
 
   canvas.draw();
 

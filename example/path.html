@@ -1,73 +1,52 @@
 <html>
 <head></head>
 <body>
-<canvas id="point" width="500", height="500"></canvas>
+<canvas id="path" width="500", height="500"></canvas>
 </body>
 <script>
-  const canvas = new Dali('#point');
+  const canvas = new Dali('#path');
+  const pathArr = [];
 
-  const path1 = new Dali.Path([
-    {
-      points: [
-        [10, 90],
-        [500, 90]
-      ],
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  const rangeEnd = getRandomInt(1, 10);
+
+  for (let i = 0; i < rangeEnd; i++) {
+    const pathObj = {
+      points: [],
       color: '#dd5411',
-    },
-    {
-      points: [
-        [10, 420],
-        [100, 120],
-        [200, 220],
-        [300, 190],
-        [400, 420]
-      ],
       arrow: true,
-      lineWidth: 5,
-      color: '#dd5411',
-    },
-    {
-      points: [
-        [10, 220],
-        [480, 220]
-      ],
-      arrow: true,
-      lineWidth: 5,
-      color: '#dd5411',
-    },
-    {
-      points: [
-        [300, 0],
-        [300, 220]
-      ],
-      color: '#dd5411',
-    },
-  ]);
+      lineWidth: 2,
+    };
 
-  // const path2 = new Dali.Path({
-  //   points: [
-  //     [10, 420],
-  //     [100, 120],
-  //     [200, 220],
-  //     [300, 190],
-  //     [400, 420]
-  //   ],
-  //   color: 'red',
-  //   lineWidth: 5,
-  //   arrow: true,
-  // });
-  // const path3 = new Dali.Path({
-  //   points: [
-  //     [10, 220],
-  //     [480, 220]
-  //   ],
-  //   color: 'green',
-  //   arrow: true,
-  // });
+    const pointCount = getRandomInt(2, 10);
+    const points = [];
+
+    for (let p = 0; p < pointCount; p++) {
+      const X = getRandomInt(0, 500);
+      const Y = getRandomInt(0, 500);
+      const point = [X, Y];
+
+      points.push(point);
+    }
+
+    pathArr.push(Object.assign(pathObj, {
+      points,
+    }));
+  }
+  
+
+  const pathLayer = new Dali.Path(pathArr);
+
+  console.log(pathLayer.getID())
 
 
-  canvas.add(path1);
-  // canvas.add([path2, path3]);
+  canvas.add(pathLayer);
   canvas.draw();
 </script>
 </html>

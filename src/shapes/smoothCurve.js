@@ -1,73 +1,89 @@
+import uuidv1 from 'uuid/v1';
+import Shape from './shape';
 import Spline from '../utils/spline';
 
-class SmoothCurve {
-  constructor(props) {
-    this.props = props;
-    this.setProperty(props);
-  }
+const LINE_TYPE = {
+  solid: [],
+  dot: [1, 2],
+  broken: [7, 2],
+  chain1: [7, 2, 2, 2],
+  chain2: [2, 2, 2, 2, 7, 2],
+};
 
-  setProperty(props) {
+const drawSmoothCurve = (self) => {
+  const { context: ctx, props } = self;
+  const propsLength = props.length;
+
+  if (propsLength === 0) return;
+
+  ctx.beginPath();
+
+  for (let propsIdx = 0; propsIdx < propsLength; propsIdx += 1) {
+    const prop = props[propsIdx];
     const {
-      route,
+      points,
+      color,
+      lineType,
+      opacity,
+      resolution = 1,
+      lineWidth = 1,
+    } = prop;
+    const style = {
       color,
       lineWidth,
-      resolution,
-    } = props || this.props;
-
-    this.route = route;
-    this.resolution = resolution;
-    this.style = {
-      color,
-      lineWidth,
+      opacity,
     };
+
+    ctx.beginPath();
+    self.setStyle(style);
+    if (LINE_TYPE[lineType]) {
+      ctx.setLineDash(LINE_TYPE[lineType].map(value => value * lineWidth));
+    } else {
+      ctx.setLineDash(LINE_TYPE.solid);
+    }
+
+    const start = points[0];
+    const end = points[points.length - 1];
+    const xs = points.map(p => Math.trunc(p[0]));
+    const ys = points.map(p => Math.trunc(p[1]));
+
+    ctx.moveTo(Math.trunc(start[0]), Math.trunc(start[1]));
+
+    for (let idx = start[0]; idx <= end[0]; idx += resolution) {
+      ctx.lineTo(idx, Spline(idx, xs, ys));
+    }
+    ctx.lineTo(end[0], Spline(end[0], xs, ys));
+    ctx.stroke();
+  }
+};
+
+const SmoothCurve = class extends Shape {
+  constructor(props) {
+    super(props);
+
+    this.uuid = `smmothCurve-${uuidv1()}`;
   }
 
   draw() {
-    this._beginPath();
-    this._loadPath();
-    this._setStyle();
-    this._endPath();
+    drawSmoothCurve(this);
   }
 
-  _beginPath() {
-    this.context.beginPath();
-  }
-
-  _loadPath() {
+  setStyle(style) {
     const { context: ctx } = this;
+    const {
+      bgColor = 'rgba(255,255,255,0)',
+      color = 'rgba(255,255,255,0)',
+      lineWidth = 1,
+      globalCompositeOperation = 'source-over',
+      opacity = 1,
+    } = style;
 
-    ctx.moveTo(Math.trunc(this.route[0][0]), Math.trunc(this.route[0][1]));
-    const pointLen = this.route.length;
-    const xs = this.route.map(p => Math.trunc(p[0]));
-    const ys = this.route.map(p => Math.trunc(p[1]));
-
-    for (let idx = this.route[0][0]; idx <= this.route[pointLen - 1][0]; idx += this.resolution) {
-      ctx.lineTo(idx, Spline(idx, xs, ys));
-    }
+    ctx.fillStyle = bgColor;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
+    ctx.globalCompositeOperation = globalCompositeOperation;
+    ctx.globalAlpha = opacity;
   }
-
-  _endPath() {
-    const { context: ctx } = this;
-
-    ctx.fill();
-    ctx.stroke();
-    ctx.closePath();
-  }
-
-  _setStyle() {
-    const { style, context: ctx, className } = this;
-
-    if (className === 'Text') {
-      ctx.textBaseline = style.textBaseline ? style.textBaseline : 'alphabetic';
-      ctx.textAlign = style.textAlign ? style.textAlign : 'alphabetic';
-      ctx.font = `${style.fontSize} ${style.fontFamily}`;
-    }
-
-    ctx.fillStyle = style.bgColor ? style.bgColor : 'rgba(255,255,255,0)';
-    ctx.strokeStyle = style.color ? style.color : 'rgba(255,255,255,0)';
-    ctx.lineWidth = style.lineWidth ? style.lineWidth : '1';
-    ctx.globalCompositeOperation = style.globalCompositeOperation ? style.globalCompositeOperation : 'source-over';
-  }
-}
+};
 
 export default SmoothCurve;
