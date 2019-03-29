@@ -1,6 +1,6 @@
 {
   "name": "dali.2d",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Draw something awesome on the Canvas With JavaScript",
   "keywords": [
     "canvas",
@@ -44,7 +44,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
-    "canvas-simple-event": "^0.1.5",
+    "canvas-simple-event": "^0.1.6",
     "uuid": "^3.3.2"
   }
 }

@@ -1,12 +1,12 @@
 <html>
 <head></head>
 <body>
-<canvas id="point" width="2000", height="2000"></canvas>
+<canvas id="polygon" width="2000", height="2000"></canvas>
 </body>
 <script>
-  const canvas = new Dali('#point');
+  const canvas = new Dali('#polygon');
 
-  fetch('./poly.json').then((resp) => {
+  fetch('./polygon.json').then((resp) => {
     return resp.json();
   }).then((data) => {
     const poly1 = new Dali.Polygon(data);

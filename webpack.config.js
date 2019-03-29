@@ -33,7 +33,7 @@ module.exports = {
     new WebpackCleanupPlugin(['dist']),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: 'example/polygon.html',
+      template: 'example/path.html',
     }),
   ],
 };
